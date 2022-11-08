@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 	j = 0;
 	va_start(to_match, format);
 
-	while (i < lenformat)
+	while (i < (lenformat - 1))
 	{
 		if (format[i] == '%')
 		{
