@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 
 	va_list to_match;
 
-	if (format == NULL)
+	if (format == NULL || (format[0] == '%' && !format[1]))
 		return (-1);
 	va_start(to_match, format);
 
