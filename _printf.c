@@ -9,44 +9,43 @@
 
 int _printf(const char *format, ...)
 {
-	int nb = 0; /* nb : number of % read in format*/
-	int lenformat, i, j;
+	int nbpr = 0;
+	int i, j, out;
 
 	typ match[] = {
-		{"c", pr_c},
-		{"s", pr_s},
-		{"%", pr_p},
-		{NULL, NULL},
+		{'c', pr_c},
+		{'s', pr_s},
+		{'%', pr_p},
+		{0, NULL},
 	};
 
 	va_list to_match;
 
-	lenformat = strlen(format);
-	i = 0;
-	j = 0;
 	va_start(to_match, format);
 
-	while (i < lenformat)
+	for (i = 0; format[i] != '\0'; i++)
 	{
+		out = i;
 		if (format[i] == '%')
 		{
-			nb = nb + 1;
-			while (j < 4)
+			for (j = 0; match[j].vp != 0; j++)
 			{
-				if (format[i + 1] == *match[j].vp)
+				if (format[i + 1] == match[j].vp)
 				{
-					match[j].f(to_match);
-					break;
+					nbpr += match[j].f(to_match);
+					i++;
 				}
-				j++;
 			}
-			i = i + 1;
+		}
+		else if (format[i] == '\n')
+		{
+			_putchar('\n');
+			nbpr -= 1;
 		}
 		else
 			_putchar(format[i]);
-		i++;
 	}
+	nbpr += out;
 	va_end(to_match);
-	/*_putchar('\n');*/
-	return (0);
+	return (nbpr);
 }
