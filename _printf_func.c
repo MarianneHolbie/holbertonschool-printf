@@ -24,7 +24,7 @@ int pr_c(va_list match)
 
 int pr_s(va_list match)
 {
-	int len = 0;
+	int k, len = 0;
 	char *toprint;
 
 	toprint = va_arg(match, char *);
@@ -33,7 +33,11 @@ int pr_s(va_list match)
 	if (toprint == NULL)
 		toprint = "(null)";
 
-	return (write(1, toprint, len));
+	for (k = 0; k < len; k++)
+	{
+		_putchar(toprint[k]);
+	}
+	return (len);
 }
 
 /**

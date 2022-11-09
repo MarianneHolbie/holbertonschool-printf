@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	int nbpr = 0;
-	int i, j;
+	int i, j, out;
 
 	typ match[] = {
 		{'c', pr_c},
@@ -25,14 +25,14 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		nbpr = nbpr + 1;
+		out = i;
 		if (format[i] == '%')
 		{
 			for (j = 0; match[j].vp != 0; j++)
 			{
 				if (format[i + 1] == match[j].vp)
 				{
-					match[j].f(to_match);
+					nbpr += match[j].f(to_match);
 					i++;
 				}
 			}
@@ -40,10 +40,12 @@ int _printf(const char *format, ...)
 		else if (format[i] == '\n')
 		{
 			_putchar('\n');
+			nbpr -= 1;
 		}
 		else
 			_putchar(format[i]);
 	}
+	nbpr += out;
 	va_end(to_match);
 	return (nbpr);
 }
