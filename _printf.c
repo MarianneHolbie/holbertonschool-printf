@@ -38,10 +38,9 @@ int _printf(const char *format, ...)
 					break;
 				}
 			}
-			if (match[j].vp == 0) /* si aucun i+1 connu, imprime just % */
+			if (match[j].vp == 0 && format[i + 1]) /* imprime % si pas seul */
 			{
-				_putchar('%');
-				nbpr++;
+				nbpr += _putchar('%');
 			}
 		}
 		else
