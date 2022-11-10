@@ -16,6 +16,8 @@ int _printf(const char *format, ...)
 		{'c', pr_c},
 		{'s', pr_s},
 		{'%', pr_p},
+		{'d', pr_di},
+		{'i', pr_di},
 		{0, NULL},
 	};
 
@@ -25,7 +27,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	va_start(to_match, format);
 
-	for (i = 0; format[i] != '\0'; i++) /* ajout format car pas null */
+	for (i = 0; format && format[i] != '\0'; i++) /* ajout format car pas null */
 	{
 		if (format[i] == '%') /* si c'est un % */
 		{
@@ -33,7 +35,7 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1] == match[j].vp) /* test du char après % */
 				{
-					nbpr += match[j].f(to_match); /* ajout au compteur de char */
+					nbpr = nbpr + match[j].f(to_match); /* ajout au compteur de char */
 					i++;
 					break;
 				}
