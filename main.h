@@ -15,8 +15,8 @@
  */
 typedef struct typeprint
 {
-        char vp;
-        int (*f)(va_list);
+	char vp;
+	int (*f)(va_list);
 } typ;
 
 /* f° qui appelle la f°print correspondante au char */

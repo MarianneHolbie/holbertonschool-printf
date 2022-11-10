@@ -12,32 +12,32 @@ int pr_c(va_list match)
 	char ctoprint;
 
 	ctoprint = va_arg(match, int);
-	return (_putchar(ctoprint));
+	_putchar(ctoprint);
+	return (1);
 }
 
 /**
  * pr_s- function that print %s
  * @match: type de char to print
  *
- * Return: k
+ * Return: lenght of string
  */
 
 int pr_s(va_list match)
 {
-	int k, len = 0;
-	char *toprint;
+	int k = 0;
+	char *toprint; /* pointer to string to print */
 
 	toprint = va_arg(match, char *);
-	len = strlen(toprint);
 
 	if (toprint == NULL)
 		toprint = "(null)";
 
-	for (k = 0; k < len; k++)
+	for (k = 0; toprint[k] != '\0'; k++)
 	{
 		_putchar(toprint[k]);
 	}
-	return (len);
+	return (k); /* k count length of toprint */
 }
 
 /**
@@ -49,7 +49,7 @@ int pr_s(va_list match)
 
 int pr_p(va_list match)
 {
-	(void) match;
-	return (_putchar('%'));
+	(void) match; /* mute match */
+	_putchar('%');
+	return (1);
 }
-

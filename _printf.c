@@ -4,13 +4,13 @@
  * _printf- function that call function corresponding to %char
  * @format: pointer type of arg to print
  *
- * Return: charactere
+ * Return: count of charactere
  */
 
 int _printf(const char *format, ...)
 {
-	int nbpr = 0;
-	int i, j, out;
+	int nbpr = 0; /* Nb char print */
+	int i, j;
 
 	typ match[] = {
 		{'c', pr_c},
@@ -21,34 +21,33 @@ int _printf(const char *format, ...)
 
 	va_list to_match;
 
+	if (format == NULL || (format[0] == '%' && !format[1]))
+		return (-1);
 	va_start(to_match, format);
 	if (format == NULL || format[0] == '%')
 		return (-1);
 
-	for (i = 0; format[i] != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++) /* ajout format car pas null */
 	{
-		out = i;
-		if (format[i] == '%')
+		if (format[i] == '%') /* si c'est un % */
 		{
-			for (j = 0; match[j].vp != 0; j++)
+			for (j = 0; match[j].vp != 0; j++) /* parcours notre struct */
 			{
-				if (format[i + 1] == match[j].vp)
+				if (format[i + 1] == match[j].vp) /* test du char après % */
 				{
-					nbpr += match[j].f(to_match);
+					nbpr += match[j].f(to_match); /* ajout au compteur de char */
 					i++;
+					break;
 				}
 			}
-		}
-		else if (format[i] == '\n')
-		{
-			_putchar('\n');
-			nbpr -= 1;
+			if (match[j].vp == 0 && format[i + 1]) /* imprime % si pas seul */
+			{
+				nbpr += _putchar('%');
+			}
 		}
 		else
-			_putchar(format[i]);
-		/*out++;*/
+			nbpr += _putchar(format[i]); /*compteur de char & impression */
 	}
-	nbpr += out;
 	va_end(to_match);
 	return (nbpr);
 }
