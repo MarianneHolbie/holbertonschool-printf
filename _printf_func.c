@@ -53,3 +53,42 @@ int pr_p(va_list match)
 	_putchar('%');
 	return (1);
 }
+
+/**
+ * pr_di- function that print an integer
+ * @match: integer to print
+ *
+ * Return: an integer
+ */
+
+int pr_di(va_list match)
+{
+	int integer, l, number, result, divisor, count = 0;
+
+	divisor = 1; /* impossible to divide by 0*/
+	integer = va_arg(match, int);
+	number = integer;
+
+	if (integer < 0) /* if nb neg print '-' and take abs value*/
+	{
+		_putchar('-');
+		integer = integer * (-1);
+		count++; /* counter de char print */
+	}
+
+	for (l = 0; number > 9; l++) /* find largest divisor, multiple of 10*/
+	{
+		number = number / divisor;
+		divisor = divisor * 10;
+	}
+
+	for (l = 0; divisor > 0; l++) /* print the full integer*/
+	{
+		result = integer / divisor;
+		_putchar(result);
+		count++;
+		integer = integer % divisor; /* reste de la division par diviseur*/
+		divisor = divisor / 10; /* décrémentation du diviseur*/
+	}
+	return (count);
+}
