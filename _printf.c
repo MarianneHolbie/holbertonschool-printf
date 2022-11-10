@@ -20,7 +20,6 @@ int _printf(const char *format, ...)
 		{'i', pr_di},
 		{0, NULL},
 	};
-
 	va_list to_match;
 
 	if (format == NULL || (format[0] == '%' && !format[1]))

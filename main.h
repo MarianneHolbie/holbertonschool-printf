@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <limits.h>
 
 /**
  * struct typeprint- Struct tp
@@ -36,5 +37,8 @@ int pr_p(va_list to_match);
 
 /* f° putchar like */
 int _putchar(char c);
+
+/* f° rpint intmin */
+void pr_intmin();
 
 #endif
