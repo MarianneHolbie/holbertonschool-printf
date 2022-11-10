@@ -16,6 +16,8 @@ int _printf(const char *format, ...)
 		{'c', pr_c},
 		{'s', pr_s},
 		{'%', pr_p},
+		{'d', pr_di},
+		{'i', pr_di},
 		{0, NULL},
 	};
 
@@ -23,26 +25,30 @@ int _printf(const char *format, ...)
 
 	va_start(to_match, format);
 
-	for (i = 0; format[i] != '\0'; i++)
+	if (format == NULL || (format[0] == '%' && !format[1]))
+		return (-1);
+	va_start(to_match, format);
+
+	for (i = 0; format && format[i] != '\0'; i++) /* ajout format car pas null */
 	{
-		nbpr = nbpr + 1;
-		if (format[i] == '%')
+		if (format[i] == '%') /* si c'est un % */
 		{
-			for (j = 0; match[j].vp != 0; j++)
+			for (j = 0; match[j].vp != 0; j++) /* parcours notre struct */
 			{
-				if (format[i + 1] == match[j].vp)
+				if (format[i + 1] == match[j].vp) /* test du char après % */
 				{
-					match[j].f(to_match);
+					nbpr = nbpr + match[j].f(to_match); /* ajout au compteur de char */
 					i++;
+					break;
 				}
 			}
-		}
-		else if (format[i] == '\n')
-		{
-			_putchar('\n');
+			if (match[j].vp == 0 && format[i + 1]) /* imprime just % */
+			{
+				nbpr += _putchar('%');
+			}
 		}
 		else
-			_putchar(format[i]);
+			nbpr += _putchar(format[i]); /*compteur de char & impression */
 	}
 	va_end(to_match);
 	return (nbpr);
