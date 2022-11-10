@@ -63,7 +63,8 @@ int pr_p(va_list match)
 
 int pr_di(va_list match)
 {
-	int integer, count = 0, diviseur, l, number, result;
+	int integer, count = 0, diviseur, l, result;
+	unsigned int number;
 
 	diviseur = 1; /* impossible de diviser par 0 */
 	integer = va_arg(match, int);
