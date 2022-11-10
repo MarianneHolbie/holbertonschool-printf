@@ -76,9 +76,8 @@ int pr_di(va_list match)
 		count++; /* counter de charactère print */
 	}
 	number = integer;
-	for (l = 0; number > 9; l++) /* calcule le+ grand diviseur (multiple de 10) */
+	for (l = 0; number / diviseur > 9; l++) /*calcul bigdiviseur (multipl de 10)*/
 	{
-		number = number / diviseur;
 		diviseur = diviseur * 10;
 	}
 	for (l = 0; diviseur != 0; l++) /* division succesive par multiple de 10 */
