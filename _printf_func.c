@@ -41,8 +41,8 @@ int pr_s(va_list match)
 }
 
 /**
- * pr_p- function that print %
- * @match: pourcent
+ *  pr_p- function that print %
+ *  @match: pourcent
  *
  * Return: %
  */
@@ -55,40 +55,40 @@ int pr_p(va_list match)
 }
 
 /**
- * pr_di- function that print an integer
- * @match: integer to print
+ * pr_di- function that print %d and %i
+ * @match: i or d
  *
- * Return: an integer
+ * Return: length
  */
 
 int pr_di(va_list match)
 {
-	int integer, l, number, result, divisor, count = 0;
+	int integer, count = 0, diviseur, l, result;
+	unsigned int number;
 
-	divisor = 1; /* impossible to divide by 0*/
+	diviseur = 1; /* impossible de diviser par 0 */
 	integer = va_arg(match, int);
 
-	if (integer < 0) /* if nb neg print '-' and take abs value*/
+	if (integer < 0) /* si c'est un nég, prend valeur abs et on écrit - */
 	{
 		_putchar('-');
 		integer = integer * (-1);
-		count++; /* counter de char print */
+		count++; /* counter de charactère print */
 	}
 	number = integer;
 
-	for (l = 0; number > 9; l++) /* find largest divisor, multiple of 10*/
+	for (l = 0; number / diviseur > 9; l++) /*calcul bigdiviseur (multipl de 10)*/
 	{
-		number = number / divisor;
-		divisor = divisor * 10;
+		diviseur = diviseur * 10;
 	}
 
-	for (l = 0; divisor != 0; l++) /* print the full integer*/
+	for (l = 0; diviseur != 0; l++) /* division succesive par multiple de 10 */
 	{
-		result = integer / divisor;
+		result = integer / diviseur; /* dividande de la division par diviseur */
 		_putchar(result + '0');
 		count++;
-		integer = integer % divisor; /* reste de la division par diviseur*/
-		divisor = divisor / 10; /* décrémentation du diviseur*/
+		integer = integer % diviseur; /* reste de la division par diviseur */
+		diviseur = diviseur / 10; /* décrémente le diviseur */
 	}
 	return (count);
 }
