@@ -22,6 +22,8 @@ int _printf(const char *format, ...)
 	va_list to_match;
 
 	va_start(to_match, format);
+	if (format == NULL || format[0] == '%')
+		return (-1);
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
@@ -44,6 +46,7 @@ int _printf(const char *format, ...)
 		}
 		else
 			_putchar(format[i]);
+		/*out++;*/
 	}
 	nbpr += out;
 	va_end(to_match);
