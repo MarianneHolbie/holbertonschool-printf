@@ -67,7 +67,6 @@ int pr_di(va_list match)
 
 	divisor = 1; /* impossible to divide by 0*/
 	integer = va_arg(match, int);
-	number = integer;
 
 	if (integer < 0) /* if nb neg print '-' and take abs value*/
 	{
@@ -75,6 +74,7 @@ int pr_di(va_list match)
 		integer = integer * (-1);
 		count++; /* counter de char print */
 	}
+	number = integer;
 
 	for (l = 0; number > 9; l++) /* find largest divisor, multiple of 10*/
 	{
@@ -82,10 +82,10 @@ int pr_di(va_list match)
 		divisor = divisor * 10;
 	}
 
-	for (l = 0; divisor > 0; l++) /* print the full integer*/
+	for (l = 0; divisor != 0; l++) /* print the full integer*/
 	{
 		result = integer / divisor;
-		_putchar(result);
+		_putchar(result + '0');
 		count++;
 		integer = integer % divisor; /* reste de la division par diviseur*/
 		divisor = divisor / 10; /* décrémentation du diviseur*/
