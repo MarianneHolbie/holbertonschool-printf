@@ -1,15 +1,22 @@
 .TH _printf 3
+
+
 .SH NAME
+
 _printf 
+
 .SH SYNOPSIS
 .B #include "main.h"
 .B int _printf(const char *format, ...)
+
 .SH DESCRIPTION
 .B _printf
 is a function that sends formatted output tostdout.
 
 
+
 .SH OPTIONS
+
 
 .B Specifier
 
@@ -23,8 +30,82 @@ Prints a string of characters
 .BR %
 Prints a '%' character
 .TP
-.BR d
+.BR d, i
 Prints a decimal integer
+
+
+.SH RETURN VALUE
+
+Upon successful return, 
+.B _printf
+returns the number of characters printed (excluding the null byte used to end output to strings).
+
+If an output error is encountered, a negative value is returned.
+
+
+.SH EXAMPLES
+
+To print "Hello world":
+
+	#include "main.h" 
+
+	_printf("%s\n", "Hello world");
+
+or
+
+	#include "main.h"
+
+	char *s = "Hello world";
+
+	_printf("%s\n", s);
+
+
+To print a date and time in the form "Sunday, July 3, 10:12", where weekday and month are pointers to strings:
+
+	#include "main.h"
+
+	char *weekday = "Sunday";
+	char *month = "July";
+	int day = 3;
+	int hour = 10;
+	int min = 12;
+
+	_printf("%s, %s %d, %d:%d\n", weekday, month, day, hour, min);
+
+.SH SEE ALSO
 .TP
-.BR i
-Prints a decimal integer
+.BR printf(3):
+.B _printf
+is a 
+.BR printf
+function like
+
+
+.SH AUTHORS
+
+This man page was written by
+.B Marianne ARRUE
+and
+.B Marine DEHAYE
+
+
+.SH REPORTING BUGS
+
+Try again our 
+.B _printf 
+is perfect.
+
+If you have any other problem do not hesitate to use the 
+.B real printf 
+!
+
+But if you really want to complain you can contact us by email at marianneandmarine@inyourdreams.com, we will come back to you under 15' Taieb minutes.
+
+
+.SH DEDICATION
+
+A word for our amazing collaborator
+.B GITHUB: Love you forever Bro!
+
+Thanks also to all the holbies who support us in the best and the worst days!
+.B XOXO
