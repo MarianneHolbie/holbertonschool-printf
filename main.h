@@ -39,6 +39,6 @@ int pr_p(va_list to_match);
 int _putchar(char c);
 
 /* f° rpint intmin */
-void pr_intmin();
+void pr_intmin(void);
 
 #endif
